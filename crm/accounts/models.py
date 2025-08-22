@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-# Customer Table
-class Customer(models.Model):
+# Customers Table
+class Customers(models.Model):
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -23,8 +23,8 @@ class Tag(models.Model):
         return self.name
   
 
-# Product Table
-class Product(models.Model):
+# Products Table
+class Products(models.Model):
     CATEGORY = (
         ('Indoor', 'Indoor'),
         ('Outdoor', 'Outdoor'),
@@ -36,20 +36,20 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     tags = models.ManyToManyField(Tag)
 
-    # So we can display product in the table rather than Object
+    # So we can display Products in the table rather than Object
     def __str__(self):
         return self.name
 
 
-# Order Table
-class Order(models.Model):
+# Orders Table
+class Orders(models.Model):
     STATUS = (
         ('Pending', 'Pending'),
         ('Out for Delivery', 'Out for Delivery'),
         ('Delivered', 'Delivered'),
     )
     
-    customer = models.ForeignKey(Customer, null=True, on_delete= models.SET_NULL)
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customers, null=True, on_delete= models.SET_NULL)
+    products = models.ForeignKey(Products, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
