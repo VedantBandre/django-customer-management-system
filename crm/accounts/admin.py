@@ -4,7 +4,7 @@ from django.contrib import admin
 
 # Registering the models created in models.py
 from .models import *
-admin.site.register(Customer)
+admin.site.register(Customers)
 admin.site.register(Tag)
-admin.site.register(Product)
-admin.site.register(Order)
+admin.site.register(Products)
+admin.site.register(Orders)
