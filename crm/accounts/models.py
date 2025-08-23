@@ -53,6 +53,7 @@ class Orders(models.Model):
     products = models.ForeignKey(Products, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
+    note = models.CharField(max_length=1000, null=True)
 
     # So we can display order name
     def __str__(self):
