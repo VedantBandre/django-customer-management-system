@@ -6,13 +6,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
 from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
+from .decorators import unauthenticated_user, allowed_users, admin_only
+
 
 @login_required(login_url='login')
+@admin_only
 def home(request):
     orders = Orders.objects.all()
     customers = Customers.objects.all()
@@ -28,12 +32,16 @@ def home(request):
 
     return render(request, 'accounts/dashboard.html', context)
 
+
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def products(request):
     products = Products.objects.all()
     return render(request, 'accounts/products.html', {'products':products})
 
+
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def customers(request, pk_test):
     customer = Customers.objects.get(id=pk_test)
 
@@ -46,7 +54,9 @@ def customers(request, pk_test):
     context = {'customer':customer, 'orders':orders, 'order_count':order_count, 'myFilter':myFilter}
     return render(request, 'accounts/customers.html', context)
 
+
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customers, Orders, fields=('products','status'), extra=3)
     customer = Customers.objects.get(id=pk)
@@ -63,7 +73,9 @@ def createOrder(request, pk):
     context = {'form':formset}
     return render(request, 'accounts/order_form.html', context)
 
+
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):  
     order = Orders.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -78,7 +90,9 @@ def updateOrder(request, pk):
     context = {'form':form, 'pk': pk}
     return render(request, 'accounts/order_form.html', context)
 
+
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def deleteOrder(request, pk):
     order = Orders.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -91,42 +105,49 @@ def deleteOrder(request, pk):
     return render(request, 'accounts/delete.html', context)
 
 
+@unauthenticated_user
 def registerPage(request):
-	if request.user.is_authenticated:
-		return redirect('home')
-	else:
-		form = CreateUserForm()
-		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
-			if form.is_valid():
-				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, 'Account was created for ' + user)
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
 
-				return redirect('login')
+            group = Group.objects.get(name='customers')
+            user.groups.add(group)
 
-		context = {'form':form}
-		return render(request, 'accounts/register.html', context)
+            messages.success(request, 'Account was created for ' + username)
 
+            return redirect('login')
+
+    context = {'form':form}
+    return render(request, 'accounts/register.html', context)
+
+
+@unauthenticated_user
 def loginPage(request):
-	if request.user.is_authenticated:
-		return redirect('home')
-	else:
-		if request.method == 'POST':
-			username = request.POST.get('username')
-			password =request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password =request.POST.get('password')
 
-			user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-			if user is not None:
-				login(request, user)
-				return redirect('home')
-			else:
-				messages.info(request, 'Username OR password is incorrect')
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
 
-		context = {}
-		return render(request, 'accounts/login.html', context)
+    context = {}
+    return render(request, 'accounts/login.html', context)
+
 
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+
+def userPage(request):
+	context = {}
+	return render(request, 'accounts/user.html', context)
