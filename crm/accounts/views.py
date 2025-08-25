@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
-from .models import *
-from .forms import OrderForm
-from .filters import OrderFilter
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+from .models import *
+from .forms import OrderForm, CreateUserForm
+from .filters import OrderFilter
 
-
+@login_required(login_url='login')
 def home(request):
     orders = Orders.objects.all()
     customers = Customers.objects.all()
@@ -22,10 +28,12 @@ def home(request):
 
     return render(request, 'accounts/dashboard.html', context)
 
+@login_required(login_url='login')
 def products(request):
     products = Products.objects.all()
     return render(request, 'accounts/products.html', {'products':products})
 
+@login_required(login_url='login')
 def customers(request, pk_test):
     customer = Customers.objects.get(id=pk_test)
 
@@ -38,7 +46,7 @@ def customers(request, pk_test):
     context = {'customer':customer, 'orders':orders, 'order_count':order_count, 'myFilter':myFilter}
     return render(request, 'accounts/customers.html', context)
 
-
+@login_required(login_url='login')
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customers, Orders, fields=('products','status'), extra=3)
     customer = Customers.objects.get(id=pk)
@@ -55,9 +63,8 @@ def createOrder(request, pk):
     context = {'form':formset}
     return render(request, 'accounts/order_form.html', context)
 
-
-def updateOrder(request, pk):
-    
+@login_required(login_url='login')
+def updateOrder(request, pk):  
     order = Orders.objects.get(id=pk)
     form = OrderForm(instance=order)
     
@@ -71,9 +78,8 @@ def updateOrder(request, pk):
     context = {'form':form, 'pk': pk}
     return render(request, 'accounts/order_form.html', context)
 
-
+@login_required(login_url='login')
 def deleteOrder(request, pk):
-    
     order = Orders.objects.get(id=pk)
     form = OrderForm(instance=order)
 
@@ -83,3 +89,44 @@ def deleteOrder(request, pk):
     
     context = {'item':order, 'pk': pk}
     return render(request, 'accounts/delete.html', context)
+
+
+def registerPage(request):
+	if request.user.is_authenticated:
+		return redirect('home')
+	else:
+		form = CreateUserForm()
+		if request.method == 'POST':
+			form = CreateUserForm(request.POST)
+			if form.is_valid():
+				form.save()
+				user = form.cleaned_data.get('username')
+				messages.success(request, 'Account was created for ' + user)
+
+				return redirect('login')
+
+		context = {'form':form}
+		return render(request, 'accounts/register.html', context)
+
+def loginPage(request):
+	if request.user.is_authenticated:
+		return redirect('home')
+	else:
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password =request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)
+
+			if user is not None:
+				login(request, user)
+				return redirect('home')
+			else:
+				messages.info(request, 'Username OR password is incorrect')
+
+		context = {}
+		return render(request, 'accounts/login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('login')
