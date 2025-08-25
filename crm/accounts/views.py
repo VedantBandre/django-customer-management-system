@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, CustomerForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -116,6 +116,9 @@ def registerPage(request):
 
             group = Group.objects.get(name='customers')
             user.groups.add(group)
+            Customers.objects.create(
+                user=user,
+            )
 
             messages.success(request, 'Account was created for ' + username)
 
@@ -147,7 +150,30 @@ def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
 def userPage(request):
-	context = {}
-	return render(request, 'accounts/user.html', context)
+    orders = request.user.customers.orders_set.all()
+
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+
+    print(orders)
+    context = {'orders': orders, 'customers':customers, 'total_orders': total_orders, 
+               'delivered':delivered, 'pending':pending}
+    return render(request, 'accounts/user.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
+def accountSettings(request):
+    customer = request.user.customers
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form}
+    return render(request, 'accounts/account_settings.html', context)
