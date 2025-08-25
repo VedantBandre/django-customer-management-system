@@ -28,4 +28,5 @@
 
 .navbar {
     background-color: #000000 !important; /* Pure black, overrides .bg-dark */
+    color: #ebeff5;
 }
