@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # adding my apps
-    'accounts',
+    # 'accounts',
+    'accounts.apps.AccountsConfig',
 
     # adding the filter library
     'django_filters',
