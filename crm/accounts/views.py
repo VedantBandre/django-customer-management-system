@@ -107,18 +107,12 @@ def deleteOrder(request, pk):
 
 @unauthenticated_user
 def registerPage(request):
-    form = CreateUserForm()
+    form = CreateUserForm(request.POST, instance=None)
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='customers')
-            user.groups.add(group)
-            Customers.objects.create(
-                user=user,
-            )
 
             messages.success(request, 'Account was created for ' + username)
 
