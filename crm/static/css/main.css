@@ -1,32 +1,392 @@
 #logo{
-        background-color: black;
-    }
+    background-color: black;
+}
 
-    body{
-        background-color: #ebeff5;
-    }
+body{
+    background-color: #ebeff5;
+}
 
+#total-orders{
+    background-color: #7CD1C0;
+}
 
-    #total-orders{
-        background-color: #4cb4c7;
-    }
+#orders-delivered{
+    background-color: seagreen;
+}
 
-
-    #orders-delivered{
-        background-color: #7abecc;
-    }
-
-    #orders-pending{
-        background-color: #7CD1C0;
-    }
+#orders-pending{
+    background-color: sandybrown;
+}
 
 .navbar img {
     height: 100%; /* Makes the image height match the navbar's height */
-    width: auto; /* Maintains aspect ratio by adjusting width proportionally */
+    width: auto;  /* Maintains aspect ratio by adjusting width proportionally */
     max-height: 40px; /* Optional: Set a max-height to prevent oversized logos */
 }
 
 .navbar {
     background-color: #000000 !important; /* Pure black, overrides .bg-dark */
     color: #ebeff5;
+}
+
+
+/* Equal-height stat cards */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 140px; /* tweak if you want taller cards */
+}
+.stat-card .card-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers the numbers vertically */
+}
+
+
+
+/* ===== AURORA THEME VARIABLES ===== */
+.theme-aurora {
+  --bg: #0f172a;         /* slate-900 */
+  --surface: #111827;    /* gray-900-ish */
+  --text: #e2e8f0;       /* slate-200 */
+  --muted: #94a3b8;      /* slate-400 */
+  --primary: #22d3ee;    /* cyan-400 */
+  --primary-600: #06b6d4;/* cyan-500 */
+  --border: rgba(148,163,184,.25);
+}
+
+/* Base colors */
+body.theme-aurora {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Links */
+/* CHANGED: exclude .btn so <a class="btn ..."> keeps button colors */
+body.theme-aurora a:not(.btn) { color: var(--primary); }
+body.theme-aurora a:not(.btn):hover,
+body.theme-aurora a:not(.btn):focus { color: var(--primary-600); }
+
+/* Cards / dropdowns / modals */
+.card, .list-group, .dropdown-menu, .modal-content {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Muted text */
+.text-muted { color: var(--muted) !important; }
+
+/* Buttons tuned to theme */
+/* Primary stays white text */
+.btn-primary,
+a.btn.btn-primary {
+  color: #fff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  color: #fff; /* ensure it stays white */
+  background-color: var(--primary-600);
+  border-color: var(--primary-600);
+}
+
+/* CHANGED: Outline primary uses white text too */
+.btn-outline-primary,
+a.btn.btn-outline-primary {
+  color: #fff;
+  border-color: var(--primary);
+  background-color: transparent;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: #fff; /* keep white on hover */
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Ensure buttons never pick up underline from links */
+.btn:focus, .btn:hover { text-decoration: none; }
+
+/* Form focus ring */
+.form-control:focus {
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .25);
+}
+
+/* Tables (optional) */
+.table { color: var(--text); }
+.table thead th { border-bottom-color: var(--border); }
+.table td, .table th { border-top-color: var(--border); }
+
+/* ===== FOOTER ===== */
+.app-footer {
+  background:
+    radial-gradient(700px 240px at 10% 0%, rgba(99,102,241,.08), transparent 70%),
+    radial-gradient(700px 240px at 90% 0%, rgba(34,211,238,.08), transparent 70%),
+    var(--surface);
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+.app-footer .footer-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+.app-footer .footer-link:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+.app-footer .footer-divider {
+  border-top: 1px solid var(--border);
+}
+.icon-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid var(--border);
+  color: var(--text);
+  background: rgba(148,163,184,.06);
+}
+.icon-btn:hover { background: rgba(148,163,184,.12); text-decoration:none; }
+
+
+/* Aurora navbar */
+.app-navbar {
+  background:
+    linear-gradient(180deg, rgba(2,6,23,.85), rgba(2,6,23,.85)) 0 0 / 100% 100%,
+    transparent;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { height: 28px; width: auto; }
+.brand-text { color: var(--text); font-weight: 700; letter-spacing: .2px; }
+
+/* Links */
+.app-navbar .navbar-nav .nav-link {
+  color: var(--muted);
+}
+.app-navbar .navbar-nav .nav-link:hover,
+.app-navbar .navbar-nav .nav-link:focus {
+  color: var(--primary);
+}
+.app-navbar .nav-item.active > .nav-link,
+.app-navbar .nav-link.active {
+  color: var(--primary);
+}
+
+/* Greeting text */
+.hello-msg {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Toggler icon contrast for dark bg */
+.app-navbar.navbar-dark .navbar-toggler {
+  border-color: rgba(255,255,255,.25);
+}
+
+
+
+/* Force bootstrap look for filter form fields */
+.card form .form-control,
+.card form select {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .25rem .5rem;
+  font-size: .875rem;
+}
+
+
+
+/* --- Single-line filter bar (no widget_tweaks) --- */
+.filter-inline .form-group { display: inline-flex; align-items: center; }
+.filter-inline .form-group + .form-group { margin-left: .25rem; }
+
+/* Make unstyled Django fields look like Bootstrap controls */
+.filter-inline input[type="text"],
+.filter-inline input[type="search"],
+.filter-inline input[type="date"],
+.filter-inline input[type="number"],
+.filter-inline select,
+.filter-inline textarea {
+  display: inline-block;
+  min-width: 180px;              /* tweak per field if you want */
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  border-radius: .25rem;
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+/* Keep selects same height as inputs */
+.filter-inline select {
+  height: calc(1.5em + .5rem + 2px);
+}
+
+/* Focus style to match Aurora */
+.filter-inline input:focus,
+.filter-inline select:focus,
+.filter-inline textarea:focus {
+  outline: 0;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .25);
+}
+
+/* On small screens, stack gracefully */
+@media (max-width: 576px) {
+  .filter-inline { display: block; }
+  .filter-inline .form-group { display: block; margin-right: 0; }
+  .filter-inline input,
+  .filter-inline select,
+  .filter-inline textarea { width: 100%; min-width: 0; }
+}
+
+
+/* Auth header */
+/* .brand-dot {
+  width:14px; height:14px; border-radius:50%;
+  background: var(--primary);
+  box-shadow: 0 0 12px rgba(34,211,238,.4);
+}
+.brand-dot-lg { width:16px; height:16px; box-shadow: 0 0 14px rgba(34,211,238,.45); } */
+
+.brand-title {
+  font-weight: 800;
+  /* bigger than the subtitle; responsive */
+  font-size: clamp(1.6rem, 2.2vw + 1rem, 2.3rem);
+  letter-spacing: .2px;
+  color: var(--text);
+}
+
+.auth-subtitle {
+  font-weight: 600;
+  font-size: 1.25rem; /* smaller than brand title */
+  color: var(--text);
+  opacity: .95;
+}
+
+
+/* Auth form fields (register/login) */
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="tel"],
+.auth-form select {
+  display: block;
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: .95rem;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  border-radius: .25rem;
+  background-color: var(--surface);
+  color: var(--text);
+}
+.auth-form input:focus,
+.auth-form select:focus {
+  outline: 0;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .25);
+}
+
+
+
+/* Status badges */
+.status-badge {
+  font-weight: 600;
+  border-radius: .35rem;
+  padding: .35rem .5rem;
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+/* Delivered */
+.status-badge[data-status="delivered"] {
+  background-color: #10b981;         /* emerald-500 */
+  border-color: rgba(16,185,129,.35);
+}
+
+/* Out for Delivery */
+.status-badge[data-status="out-for-delivery"] {
+  background-color: #06b6d4;         /* cyan-500 */
+  border-color: rgba(6,182,212,.35);
+}
+
+/* Pending */
+.status-badge[data-status="pending"] {
+  background-color: #f59e0b;         /* amber-500 */
+  border-color: rgba(245,158,11,.35);
+}
+
+/* Cancelled / Canceled */
+.status-badge[data-status="cancelled"],
+.status-badge[data-status="canceled"] {
+  background-color: #ef4444;         /* red-500 */
+  border-color: rgba(239,68,68,.35);
+}
+
+/* Fallback */
+.status-badge[data-status="processing"],
+.status-badge[data-status="in-progress"] {
+  background-color: #6366f1;         /* indigo-500 */
+  border-color: rgba(99,102,241,.35);
+}
+.status-badge:not([data-status]) {
+  background-color: #64748b;         /* slate-500 */
+  border-color: rgba(100,116,139,.35);
+}
+
+
+/* ensure equal-height cards inside stretched row */
+.row.align-items-stretch > [class*="col-"] > .card {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* Account form alignment + Aurora styling */
+.account-form .form-group { margin-bottom: .85rem; }
+
+/* style inputs without relying on form-control on the widget */
+.account-form input[type="text"],
+.account-form input[type="email"],
+.account-form input[type="password"],
+.account-form input[type="tel"],
+.account-form input[type="file"],
+.account-form select,
+.account-form textarea {
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: .95rem;
+    line-height: 1.5;
+    border: 1px solid var(--border);
+    border-radius: .25rem;
+    background-color: var(--surface);
+    color: var(--text);
+}
+
+.account-form input:focus,
+.account-form select:focus,
+.account-form textarea:focus {
+    outline: 0;
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .25);
+}
+
+/* make file input text readable on dark bg */
+.account-form input[type="file"] {
+    padding: .35rem .5rem;
+}
+
+/* stack nicely on very small screens */
+@media (max-width: 575.98px) {
+    .account-form .col-form-label {
+        padding-bottom: .25rem;
+    }
 }

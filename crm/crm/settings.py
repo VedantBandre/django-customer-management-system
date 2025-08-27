@@ -69,10 +69,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # site name
+                'accounts.context_processors.site_brand',
             ],
         },
     },
 ]
+
+SITE_NAME = "E-Corp CMS"
 
 WSGI_APPLICATION = 'crm.wsgi.application'
 
