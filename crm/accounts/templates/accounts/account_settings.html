@@ -1,41 +1,65 @@
-{%  extends 'accounts/main.html' %}
+{% extends 'accounts/main.html' %}
 {% load static %}
 {% block content %}
 
 <style>
-	.profile-pic{
-		max-width: 200px;
-		max-height:200px;
-		margin: 0 auto;
-		border-radius: 50%;
-	}
+  .profile-pic{
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+    border-radius: 0%;
+  }
 </style>
 
 <br>
-<div class="row">
-	<div class="col-md-3">
-		<div class="card card-body">
+<div class="row align-items-stretch">
+	<!-- LEFT -->
+	<div class="col-md-3 d-flex">
+		<div class="card card-body shadow-sm h-100 w-100">
+			<h3 class="text-center">Account Settings</h3>
+			<hr>
+			<img class="profile-pic" src="{{ request.user.customers.profile_pic.url }}" alt="Profile picture">
+			<hr>
 			<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Profile</a>
 			<hr>
-			<h3 style="text-align: center">Account Settings</h3>
-			<hr>
-			<img class="profile-pic" src="{{request.user.customers.profile_pic.url}}" >
-		
 		</div>
-	</div>
-	<div class="col-md-9">
-		<div class="card card-body">
-			
-			<form method="POST" action="" enctype="multipart/form-data">
+  	</div>
+
+	<!-- RIGHT -->
+	<div class="col-md-9 d-flex">
+		<div class="card card-body shadow-sm h-100 w-100">
+			<form method="POST" action="" enctype="multipart/form-data" class="account-form">
 				{% csrf_token %}
-				{{form.as_p}}
-		
-			<input class="btn btn-primary" type="submit" name="Update Information">
+
+				{% for field in form.visible_fields %}
+					<div class="form-group row">
+						<label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label text-muted small">
+							{{ field.label }}
+							<br>
+						</label>
+						<div class="col-sm-8">
+							{{ field }}
+							{% if field.help_text %}
+								<small class="form-text text-muted">{{ field.help_text|safe }}</small>
+							{% endif %}
+							{% for error in field.errors %}
+								<div class="invalid-feedback d-block">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endfor %}
+				<br>
+				<div class="form-group row mb-0">
+					<div class="col-sm-8 offset-sm-4 text-left">
+						<button class="btn btn-primary" style="background-color: mediumseagreen; color: #fff; border-color: black;" type="submit">Update Information</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
+
+
+
 </div>
-
-
 
 {% endblock %}
