@@ -9,7 +9,7 @@ A clean, modern **Django CMS** to manage customers and orders — featuring a da
 
 ---
 <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/263d7c84-51e9-4a54-ad34-fa70e023bcc4" />
----
+
 
 ## Features
 
