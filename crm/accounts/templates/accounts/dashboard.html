@@ -11,14 +11,14 @@
 		<h5>Customers</h5>
 		<hr>
 		<div class="card card-body">
-			<!-- <a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a> -->
 			<table class="table table-sm">
-				<tr>
-					<th></th>
-					<th>Customer</th>
-					<th>Phone Number</th>
-				</tr>
-
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col"></th>
+						<th scope="col">Customer</th>
+						<th scope="col">Phone Number</th>
+					</tr>
+				</thead>
 				{% for customer in customers %}
 					<tr>
 						<td><a class="btn btn-sm btn-info" href="{% url 'customers' customer.id %}">View</a></td>
@@ -36,13 +36,15 @@
 		<hr>
 		<div class="card card-body">
 			<table class="table table-sm">
-				<tr>
-					<th>Product</th>
-					<th>Date Orderd</th>
-					<th>Status</th>
-					<th>Update</th>
-					<th>Remove</th>
-				</tr>
+				<thead class="thead-dark">
+					<tr>
+						<th>Product</th>
+						<th>Date Orderd</th>
+						<th>Status</th>
+						<th>Update</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
 				{% for order in orders %}
 					<tr>
 						<td>{{order.products}}</td>
