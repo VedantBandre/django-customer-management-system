@@ -5,7 +5,7 @@ A clean, modern **Django CMS** to manage customers and orders — featuring a da
 ![Django](https://img.shields.io/badge/Django-5.x-0f172a?logo=django)
 ![Python](https://img.shields.io/badge/Python-3.11+-0f172a?logo=python)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-4.3-0f172a?logo=bootstrap)
-![License](https://img.shields.io/badge/License-%3F-0f172a)
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 ---
 <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/263d7c84-51e9-4a54-ad34-fa70e023bcc4" />
@@ -83,8 +83,6 @@ customer-management-application/
 ├── manage.py
 └── db.sqlite3
 ```
-
-> Names may vary slightly in your repo — the README assumes the structure we worked with during styling and feature additions.
 
 ---
 
@@ -277,14 +275,11 @@ python manage.py collectstatic
   
 
 * `/reset_password/` and the rest of the password reset flow
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/11f3d5ad-88ed-442b-bba3-a0932497af0f" />
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/b5861873-eb8e-48fd-a8b0-a8937ef49a8e" />
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/951672c7-1b11-48d6-b216-1edc6e2a9bd6" />
-
-
-  
-
-> Actual paths may vary based on your URLconf.
+<p align='center'>
+<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/11f3d5ad-88ed-442b-bba3-a0932497af0f" />
+<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/b5861873-eb8e-48fd-a8b0-a8937ef49a8e" />
+<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/951672c7-1b11-48d6-b216-1edc6e2a9bd6" />
+</p>
 
 ---
 
