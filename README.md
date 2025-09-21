@@ -246,39 +246,39 @@ python manage.py collectstatic
   <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/fad57e4c-88cd-4e76-936b-b644b86ec3c5" />
 
   
-* `/create_order/<customer_id>/`
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/dfeaa42b-051c-4c36-b2d7-997140920ead" />
+* `/create_order/<customer_id>/` — Create order for Customer 
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/dfeaa42b-051c-4c36-b2d7-997140920ead" />
 
   
-* `/update_order/<order_id>/`
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/7e7a1080-d4ba-4899-8eee-303c28cbd3f0" />
+* `/update_order/<order_id>/` — Update order for Customer 
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/7e7a1080-d4ba-4899-8eee-303c28cbd3f0" />
 
   
-* `/delete_order/<order_id>/`
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/70f30ff8-384c-4889-b4e7-d2031f160c21" />
+* `/delete_order/<order_id>/` — Delete order for Customer 
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/70f30ff8-384c-4889-b4e7-d2031f160c21" />
 
 
-* `/user/`
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/d500112b-3b6e-443b-8829-dd529dcc2a7f" />
+* `/user/` — Userpage
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/d500112b-3b6e-443b-8829-dd529dcc2a7f" />
 
 
 * `/account/` — Account settings (profile)
-<img width="1868" height="985" alt="image" src="https://github.com/user-attachments/assets/24ac4c93-f619-4c54-9a39-c555c4f44c7c" />
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/24ac4c93-f619-4c54-9a39-c555c4f44c7c" />
   
 
-* `/register/`
-<img width="1867" height="983" alt="image" src="https://github.com/user-attachments/assets/75deff04-73da-4f42-a733-90eb872c9631" />
+* `/register/` — Register 
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/75deff04-73da-4f42-a733-90eb872c9631" />
 
 
-* `/Sign in/`
-<img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/39ec4632-aea2-4598-acfc-1ab7e405b95d" />
+* `/Sign in/` — Sign In Page
+  <img width="1867" height="977" alt="image" src="https://github.com/user-attachments/assets/39ec4632-aea2-4598-acfc-1ab7e405b95d" />
   
 
 * `/reset_password/` and the rest of the password reset flow
 <p align='center'>
-<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/11f3d5ad-88ed-442b-bba3-a0932497af0f" />
-<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/b5861873-eb8e-48fd-a8b0-a8937ef49a8e" />
-<img width="33%"  alt="image" src="https://github.com/user-attachments/assets/951672c7-1b11-48d6-b216-1edc6e2a9bd6" />
+<img width="30%"  alt="image" src="https://github.com/user-attachments/assets/11f3d5ad-88ed-442b-bba3-a0932497af0f" />
+<img width="30%"  alt="image" src="https://github.com/user-attachments/assets/b5861873-eb8e-48fd-a8b0-a8937ef49a8e" />
+<img width="30%"  alt="image" src="https://github.com/user-attachments/assets/951672c7-1b11-48d6-b216-1edc6e2a9bd6" />
 </p>
 
 ---
